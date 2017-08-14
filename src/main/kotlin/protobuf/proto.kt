@@ -1,51 +1,13 @@
-//Protobuf's language EBNF grammar by Alek Strom obtained from:
-//http://groups.google.com/group/protobuf/browse_thread/thread/1cccfc624cd612da
-//
-//proto  ::= ( message | extend | enum | import | package | option | ";" )*
-package proto;
+package protobuf;
 
 
-abstract class  Oper (val state: parseState): Function<Oper> {
-
-    abstract fun invoke(vararg p1: Oper): Oper;
-
- companion object Dead : Oper(state= parseState.Empty ) {
-         override fun invoke(vararg p1: Oper): Oper {
-             return Dead;
-        }
-
-    }
-}
-
-
- class parseState( ) {
-companion object {
-    val Empty= parseState ();
-}}
-;
-fun repeated(any_of: Any): Any {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-}
 /*
-
-class proto(
-        repeated(
-        any_of(
-        message_kw (),
-extend_kw() ,
-enum_kw (),
-import_kw (),
-package_kw (),
-option_kw() ,
-chlit(";")
-)
-)
-)
+Protobuf's language EBNF grammar by Alek Strom obtained from:
+http://groups.google.com/group/protobuf/browse_thread/thread/1cccfc624cd612da
 */
 
-//
-//import ::= "import" strLit ";"
-//
+/**proto  ::= ( message | extend | enum | import | package | option | ";" )*
+ */
 //package ::= "package" ident ";"
 //
 //option ::= "option" optionBody ";"
