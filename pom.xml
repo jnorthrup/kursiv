@@ -5,14 +5,21 @@
          <groupId>org.github.jnorthrup.kursiv</groupId>
         <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <kotlin.version>1.1.4-2</kotlin.version>
+    </properties>
+
     <modelVersion>4.0.0</modelVersion>
     <artifactId>kursiv</artifactId>
 
-    <properties>
-        <kotlin.version>1.2-M2</kotlin.version>
-    </properties>
-
     <dependencies>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>LATEST</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jre8</artifactId>
@@ -25,10 +32,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>LATEST</version>
-            <scope>test</scope>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib-jre8</artifactId>
+            <version>${kotlin.version}</version>
         </dependency>
     </dependencies>
 
