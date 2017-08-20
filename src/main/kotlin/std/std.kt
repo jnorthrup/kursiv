@@ -13,8 +13,8 @@ val Char.lit: chOp
 typealias chOp = (Sequence<Char>) -> Boolean
 
 class chIn(val chars: Array<Char>) : chOp {
-    override fun invoke(p1: Sequence<Char>) = p1.first() in chars
-    constructor(vararg char: Char) : this(chars = char.toTypedArray())
+    override fun invoke(p1: Sequence<Char>) = chars.contains(p1.first ())
+    constructor(vararg char: Char) : this( char.toTypedArray())
 }
 
 
@@ -24,7 +24,7 @@ private fun Array<Char>.lit(): chOp {
 }
 
 class chlit(val c: Char) : chOp {
-    override fun invoke(p1: Sequence<Char>) = p1.first() == c
+    override fun invoke(p1: Sequence<Char>) = c == p1.first ()
 }
 
 class any_of(vararg val of: chOp) : chOp {
