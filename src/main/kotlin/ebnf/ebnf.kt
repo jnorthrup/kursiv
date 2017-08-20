@@ -32,18 +32,22 @@ val symbol = chIn('[', ']', '{', '}', '(', ')', '<', '>', '\'', '\'', '=', '|', 
 val singleQuote = '\''.lit
 val doubleQuote = '"'.lit
 val uscore = '_'.lit
-val character = seq(letter, digit, symbol, uscore)
-val identifier = { p1: Sequence<Char> -> seq(letter, repeating(any_of(letter, digit, uscore)))(p1) }
+val character = any_of(letter, digit, symbol, uscore)
+val identifier = seq(letter, repeating(any_of(letter, digit, uscore)))
 val terminal = any_of(seq(singleQuote, character, repeating(character), singleQuote), seq(doubleQuote, character, repeating(character), doubleQuote))
 val lhs = identifier
-object rhs : chOp  { override fun invoke(p1: Sequence<Char>) = any_of(
-        identifier,
-        terminal,
-        seq('['.lit, rhs, ']'.lit),
-        seq('{'.lit, rhs, '}'.lit),
-        seq('('.lit, rhs, ')'.lit),
-        seq(rhs, '|'.lit, rhs),
-        seq(rhs, ','.lit, rhs))(p1) }
-val rule = seq(lhs, '='.lit, rhs , ';'.lit)
+
+object rhs : chOp {
+    override fun invoke(p1: Sequence<Char>) = any_of(
+            identifier,
+            terminal,
+            seq('['.lit, rhs, ']'.lit),
+            seq('{'.lit, rhs, '}'.lit),
+            seq('('.lit, rhs, ')'.lit),
+            seq(rhs, '|'.lit, rhs),
+            seq(rhs, ','.lit, rhs))(p1)
+}
+
+val rule = seq(lhs, '='.lit, rhs, ';'.lit)
 val grammar = repeating(rule)
 

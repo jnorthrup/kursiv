@@ -1,11 +1,11 @@
 package std;
 
-fun <T> cat(vararg b: Sequence<T>) = b.reduce { a, x-> a+x}
+fun <T> cat(vararg b: Sequence<T>) = b.reduce { a, x -> a + x }
 
-fun bstr(k: Sequence<Byte>) =String(k.toList().toByteArray(), Charsets.UTF_8)
+fun bstr(k: Sequence<Byte>) = String(k.toList().toByteArray(), Charsets.UTF_8)
 fun cstr(k: Sequence<Char>) = String(k.toList().toCharArray())
-fun str(vararg k:  Byte ) =String(k)
-fun str(vararg k: Char  ) = String(k)
+fun str(vararg k: Byte) = String(k)
+fun str(vararg k: Char) = String(k)
 
 
 val Char.lit: chOp
@@ -13,8 +13,9 @@ val Char.lit: chOp
 typealias chOp = (Sequence<Char>) -> Boolean
 
 class chIn(val chars: Array<Char>) : chOp {
-    override fun invoke(p1: Sequence<Char>) = chars.contains(p1.first ())
-    constructor(vararg char: Char) : this( char.toTypedArray())
+    override fun invoke(p1: Sequence<Char>) = chars.contains(p1.first())
+
+    constructor(vararg char: Char) : this(char.toTypedArray())
 }
 
 
@@ -24,7 +25,7 @@ private fun Array<Char>.lit(): chOp {
 }
 
 class chlit(val c: Char) : chOp {
-    override fun invoke(p1: Sequence<Char>) = c == p1.first ()
+    override fun invoke(p1: Sequence<Char>) = c == p1.first()
 }
 
 class any_of(vararg val of: chOp) : chOp {

@@ -2,12 +2,11 @@ package org.github.jnorthrup.kursiv
 
 
 import org.junit.Test
-
-import org.junit.Assert.*
-import std.*
+import std.bstr
+import std.cat
+import std.cstr
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
-import kotlin.text.Charsets.UTF_8
 
 class catTest {
     @Test
@@ -25,6 +24,7 @@ class catTest {
         assertNotEquals("HelloWorld1", string)
         assertEquals("HelloWorld", string)
     }
+
     @Test
     fun str() {
         run<catTest, Unit> {
@@ -34,7 +34,7 @@ class catTest {
             assertEquals("HelloWorld", string)
         }
         run<catTest, Unit> {
-            val k = cat("Hello".toCharArray().asSequence(), "World" .toCharArray().asSequence())
+            val k = cat("Hello".toCharArray().asSequence(), "World".toCharArray().asSequence())
             val string = cstr(k)
             assertNotEquals("HelloWorld1", string)
             assertEquals("HelloWorld", string)
