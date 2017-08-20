@@ -7,3 +7,36 @@ fun cstr(k: Sequence<Char>) = String(k.toList().toCharArray())
 fun str(vararg k:  Byte ) =String(k)
 fun str(vararg k: Char  ) = String(k)
 
+
+val Char.lit: chOp
+    get() = chlit(this)
+typealias chOp = (Sequence<Char>) -> Boolean
+
+class chIn(val chars: Array<Char>) : chOp {
+    override fun invoke(p1: Sequence<Char>) = p1.first() in chars
+    constructor(vararg char: Char) : this(chars = char.toTypedArray())
+}
+
+
+private fun Array<Char>.lit(): chOp {
+    return chIn(this);
+
+}
+
+class chlit(val c: Char) : chOp {
+    override fun invoke(p1: Sequence<Char>) = p1.first() == c
+}
+
+class any_of(vararg val of: chOp) : chOp {
+    override fun invoke(p1: Sequence<Char>) = of.any { it(p1) }
+}
+
+
+class seq(vararg val use: chOp) : chOp {
+    override fun invoke(p1: Sequence<Char>) = use.all { it(p1) }
+}
+
+class repeating(vararg val function: chOp) : chOp {
+    override fun invoke(p1: Sequence<Char>) = function.all { it(p1) }
+
+}
